@@ -1,6 +1,6 @@
 {
   "name": "POE.Systems.Grid.Generation.Editor",
-  "rootNamespace": "",
+  "rootNamespace": "Scripts.Systems.GridGeneration.CustomEdit",
   "references": [
     "GUID:8493ac436d9f4b143b0f2fc457f3e145"
   ],
