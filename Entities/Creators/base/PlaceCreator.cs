@@ -26,7 +26,8 @@ namespace Scripts.Systems.GridGeneration
         protected virtual void RegisterCell(ref int lenght, ref int i, ref Vector3 step) {
             var cellType = _cellsContainer.GetCellType();
             _placeInfoCallback.PositionsOfCells.Add(step, cellType);
-            if (i == lenght - 1) _placeInfoCallback.Edged.Add(step);
+            if (i == lenght - 1) 
+                _placeInfoCallback.Edged.Add(step);
         }
     }
 }

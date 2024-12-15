@@ -10,5 +10,6 @@ namespace Scripts.Systems.GridGeneration
     {
         internal readonly List<Vector3> Edged = new();
         internal readonly Dictionary<Vector3, IGridCellData> PositionsOfCells = new();
+        internal Vector3 PlaceCenter;
     }
 }

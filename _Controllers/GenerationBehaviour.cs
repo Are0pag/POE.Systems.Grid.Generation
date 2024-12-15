@@ -40,7 +40,8 @@ namespace Scripts.Systems.GridGeneration
 
         protected virtual void SetMainBranch(int desiredLength) {
             SetPlace();
-            if (_currentLengthOfLocation < desiredLength) SetMainBranch(desiredLength);
+            if (_currentLengthOfLocation < desiredLength) 
+                SetMainBranch(desiredLength);
         }
 
         protected virtual void SetPlace() {
@@ -54,7 +55,8 @@ namespace Scripts.Systems.GridGeneration
             var rigthCornerOfGeneratedPlaceX = _previousResultsOfCreation.Edged.First().x;
             _currentLengthOfLocation += rigthCornerOfGeneratedPlaceX;
 
-            foreach (var newCell in _previousResultsOfCreation.PositionsOfCells) _callback.MapInfo.TryAdd(newCell.Key, newCell.Value);
+            foreach (var newCell in _previousResultsOfCreation.PositionsOfCells) 
+                _callback.MapInfo.TryAdd(newCell.Key, newCell.Value);
         }
     }
 }

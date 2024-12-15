@@ -12,9 +12,9 @@ namespace Scripts.Systems.GridGeneration
             Container.Bind<DirectionCalculator>().AsSingle().WithArguments(SceneSettings.Grid);
             Container.Bind<Randomizer>().AsSingle().WithArguments(_config.GenerationSettings);
 
-            Container.Bind<PlaceCreator>().To<PlaceCreatorHexagonal>().AsSingle().WithArguments(_config.CellsTypesRate);
+            Container.Bind<PlaceCreator>().To<PlaceCreatorHexagonalViewExpand>().AsSingle().WithArguments(_config.CellsTypesRate);
             Container.Bind<CreationController>().To<CreationControllerHexagonal>().AsSingle().WithArguments(SceneSettings.StartPosition);
-            Container.Bind<GenerationBehaviour>().AsSingle();
+            Container.Bind<GenerationBehaviour>().To<GenerationBehaviourViewExpand>().AsSingle();
 
             Container.Bind<SceneSettings>().FromInstance(SceneSettings).AsSingle();
             Container.Bind<GridBuilder>().FromInstance(SceneSettings.GridBuilder).AsSingle();
