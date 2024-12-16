@@ -11,6 +11,7 @@ namespace Scripts.Systems.GridGeneration
         internal override PlaceInfoCallback CreatePlace(Vector3 centerPos, int radius) {
             var callback = base.CreatePlace(centerPos, radius);
             callback.PlaceCenter = centerPos;
+            callback.Radius = radius;
             return callback;
         }
     }

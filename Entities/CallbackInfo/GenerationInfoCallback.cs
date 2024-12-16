@@ -8,5 +8,7 @@ namespace Scripts.Systems.GridGeneration
         public readonly Dictionary<Vector3, IGridCellData> MapInfo = new();
         public readonly List<Vector3> CentersOfSections = new();
         public Dictionary<DirectionsOfGrid, Vector3> Directions;
+        public float UpperSideMapY;
+        public float LowerSideMapY;
     }
 }

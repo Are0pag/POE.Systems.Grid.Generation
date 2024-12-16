@@ -10,6 +10,9 @@ namespace Scripts.Systems.GridGeneration
             base.FixateProgress();
             
             _callback.CentersOfSections.Add(_previousResultsOfCreation.PlaceCenter);
+            using (var sidesExposer = new SidesExposer()) {
+                sidesExposer.GetUpperAndLowerSides(_callback, _previousResultsOfCreation);
+            }
         }
     }
 }
