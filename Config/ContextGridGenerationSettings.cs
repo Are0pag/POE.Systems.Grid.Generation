@@ -1,41 +1,28 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
-
 namespace Scripts.Systems.GridGeneration
 {
-    [Serializable]
-    public struct GenerationSettings
+    public class ContextGridGenerationSettings
     {
-        [SerializeField, Range(0, 3000)]
         private int _defaultLocationLenght;
-
         public int DefaultLocationLenght {
-            readonly get => _defaultLocationLenght;
+            get => _defaultLocationLenght;
             private set => _defaultLocationLenght = value;
         }
         
-        [SerializeField, Range(0, 300)]
         private int _locationLengthVariability;
-
         public int LocationLengthVariability {
-            readonly get => _locationLengthVariability;
+            get => _locationLengthVariability;
             private set => _locationLengthVariability = value;
         }
         
-        [SerializeField, Range(0, 15)]
         private int _defaultRadius;
-
         public int DefaultRadius {
-            readonly get => _defaultRadius;
+            get => _defaultRadius;
             private set => _defaultRadius = value;
         }
         
-        [FormerlySerializedAs("_raduisVariability")] [SerializeField, Range(0, 20)]
         private int _radiusVariability;
-
         public int RadiusVariability {
-            readonly get => _radiusVariability;
+            get => _radiusVariability;
             private set => _radiusVariability = value;
         }
     }

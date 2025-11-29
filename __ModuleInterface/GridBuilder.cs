@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -9,39 +9,22 @@ namespace Scripts.Systems.GridGeneration
     {
         private GenerationBehaviour _generationBehaviour;
         private Transform _goParent;
+        private MapSpawner _mapSpawner;
 
         [Inject]
-        internal void Construct(GenerationBehaviour generationBehaviour, SceneSettings sceneSettings) {
+        internal void Construct(GenerationBehaviour generationBehaviour, SceneSettings sceneSettings, MapSpawner mapSpawner) {
             _generationBehaviour = generationBehaviour;
             _goParent = sceneSettings.Parent;
+            _mapSpawner = mapSpawner;
         }
 
-        public GenerationInfoCallback SetMapInfo() {
-            return _generationBehaviour.SetLocationRecursive();
-        }
+        public GenerationInfoCallback SetMapInfo() 
+            => _generationBehaviour.SetLocationRecursive();
 
-        public void InstantiateMap(Dictionary<Vector3, IGridCellData> positionsOfCells) {
-            foreach (var cell in positionsOfCells) {
-                var newCell = Instantiate(cell.Value.Prefab, cell.Key, Quaternion.identity, _goParent);
-#if UNITY_EDITOR
-                SetCleanName(cell, newCell);
-#endif
-            }
-        }
+        public void InstantiateMap(Dictionary<Vector3, IGridCellData> positionsOfCells) 
+            => _mapSpawner.Spawn(positionsOfCells, _goParent);
 
-#if UNITY_EDITOR
-        private void SetCleanName(KeyValuePair<Vector3, IGridCellData> cell, GameObject newCell) {
-            var nameOfCell = cell.Value.Prefab.name;
-            string[] names = { "Original", "Forest", "Grass", "Rock" };
-            foreach (var name in names)
-                if (nameOfCell.Contains(name, StringComparison.InvariantCultureIgnoreCase))
-                    newCell.name = name;
-        }
-
-        [ContextMenu(nameof(CreateMapInEdit))]
-        public void CreateMapInEdit() {
-            InstantiateMap(SetMapInfo().MapInfo);
-        }
-#endif
+        public async UniTask InstantiateMapSmoothlyAsync(Dictionary<Vector3, IGridCellData> positionsOfCells, float secondsDelayBetweenSpawns) 
+            => await _mapSpawner.SpawnSmoothlyAsync(positionsOfCells, _goParent, secondsDelayBetweenSpawns);
     }
 }

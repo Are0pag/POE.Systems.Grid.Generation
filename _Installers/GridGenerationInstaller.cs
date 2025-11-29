@@ -10,7 +10,8 @@ namespace Scripts.Systems.GridGeneration
 
         public override void InstallBindings() {
             Container.Bind<DirectionCalculator>().AsSingle().WithArguments(SceneSettings.Grid);
-            Container.Bind<Randomizer>().AsSingle().WithArguments(_config.GenerationSettings);
+            Container.Bind<Randomizer>().To<RandomizerContext>().AsSingle().WithArguments(_config.DefaultGenerationSettings);
+            Container.Bind<MapSpawner>().AsSingle();
 
             Container.Bind<PlaceCreator>().To<PlaceCreatorHexagonalViewExpand>().AsSingle().WithArguments(_config.CellsTypesRate);
             Container.Bind<CreationController>().To<CreationControllerHexagonal>().AsSingle().WithArguments(SceneSettings.StartPosition);
@@ -18,8 +19,8 @@ namespace Scripts.Systems.GridGeneration
 
             Container.Bind<SceneSettings>().FromInstance(SceneSettings).AsSingle();
             Container.Bind<GridBuilder>().FromInstance(SceneSettings.GridBuilder).AsSingle();
+            
+            Container.Bind<Config>().FromInstance(_config).AsSingle();
         }
-
-        protected virtual void GetConfig() { }
     }
 }
